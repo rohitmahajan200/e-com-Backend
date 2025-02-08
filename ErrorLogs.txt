@@ -1,0 +1,7 @@
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:57:06 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:57:18 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:57:36 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:59:12 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:59:18 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 01:59:21 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}
+{"level":"info","message":"Date and Time Sat Feb 08 2025 02:00:24 GMT+0530 (India Standard Time) req type -/api/user/login method -\n  POST Error-Wrong credentials","service":"request-loggin"}

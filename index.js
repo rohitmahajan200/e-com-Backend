@@ -11,6 +11,7 @@ import {
   errorLoggerMiddleware,
 } from "./src/middleware/logger.middleware.js";
 import ApplicationError from "./errorHandling.js";
+import { connectDB } from "./src/config/mongodb.js";
 const apiDoc = JSON.parse(fs.readFileSync("./swagger.json", "utf-8"));
 //import apiDoc from './swagger.json' assert {type:'json'}
 const app = express();
@@ -35,10 +36,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to E-Comm API...");
 });
 //Middleware to handle 404 requests
-app.use((req, res) => {
-  res.status(404).send("API not found.");
-});
-app.use((err, req, res, next) => {
+
+app.use((err, req, res) => {
   if (err instanceof ApplicationError) {
     res.status(err.code).send(err.message);
   } else {
@@ -47,6 +46,11 @@ app.use((err, req, res, next) => {
   }
 });
 
+app.use((req, res) => {
+  res.status(404).send("API not found.");
+});
+
 app.listen(5000, () => {
   console.log("server is up on port 5000");
+  connectDB()
 });

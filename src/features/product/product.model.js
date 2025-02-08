@@ -1,4 +1,4 @@
-import { users } from "../user/user.model.js";
+//import { users } from "../user/user.model.js";
 export default class ProductModel{
     constructor(id,name,desc,price,imgUrl,catagory,sizes){
         this.id=id,

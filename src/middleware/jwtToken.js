@@ -6,7 +6,7 @@ export const jwtAuth=(req,res,cb)=>{
         return res.status(401).send("You are not authorise!!!")
     }
     try {
-        const payload=jwt.verify(
+        const payload=jwt.verify(   
             token,
             'bgtwbcs7773efldcsdsDF[QY89'
         );
