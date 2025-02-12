@@ -1,41 +1,50 @@
 import CartModel from "./cart.model.js";
+import CartRepository from "./cart.repository.js";
+export default class CartController {
+  constructor() {
+    this.cartRepo = new CartRepository();
+  }
+  async add(req, res) {
+    try {
+      const { productId, quantity } = req.body;
+      const userId = req.userId;
+      await this.cartRepo.add(productId, quantity, userId);
+      res.status(201).send("Cart is updated");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Something went wrong.");
+    }
+  }
 
-export default class CartController{
+  async delete(req, res) {
+    try {
+      const { productId } = req.body;
+      const { userId } = req;      
+      const result=await this.cartRepo.delete(productId, userId);
+      if(result>0){
+        res.status(200).send(`${result} item's are deleted`);
+      }
+      else{
+        res.status(404).send("Cart is empty");
+      }      
+    } catch (error) {
+      res.status(500).send("Something went wrong");
+    }
+  }
 
-    static add=(req,res)=>{
-        const{productId,quantity}=req.query;
-        const userId=req.userId;
-        const newItemm=CartModel.add(productId,quantity,userId);
-        if(newItemm){
-            res.status(201).send(newItemm);
+  async get(req,res){
+    try {
+        const { userId } = req;      
+        const cartItems=await this.cartRepo.get(userId);
+        if(cartItems){
+        res.status(200).send(cartItems);
         }
         else{
-            res.status(400).send("Product does not exist")
+        res.status(404).send("Cart is empty");
         }
+      } catch (error) {
+        res.status(500).send("Something went wrong");
+      }
     }
+  }
 
-    static delete=(req,res)=>{
-        const {productId}=req.params
-        const {userId}=req;
-        const deletedItem=CartModel.delete(productId,userId);
-        if(deletedItem){
-            res.status(200).send(deletedItem);
-        }
-        else{
-            res.status(400).send("Something went wrong")
-        }
-    }
-
-    static getAll=(req,res)=>{
-        const userId=req.userId;
-        console.log("user id in get all ",userId);
-        
-        const userCart=CartModel.getAll(userId);
-        if(userCart){
-            res.status(200).send(userCart);
-        }
-        else{
-            res.status(400).send("Cart is Empty")
-        }
-    }
-}

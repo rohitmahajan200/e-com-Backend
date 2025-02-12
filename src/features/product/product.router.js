@@ -1,19 +1,38 @@
-import express from 'express';
-import ProductController from './product.controller.js';
-import { upload } from '../../middleware/file.upload.middleware.js';
-upload
-const productController=new ProductController()
+import express from "express";
+import ProductController from "./product.controller.js";
+import { upload } from "../../middleware/file.upload.middleware.js";
+const productController = new ProductController();
 
-const router = express.Router();
+export const productRouter = express.Router();
 
-router.get('/',productController.getAllProducts);
-router.post('/',upload.single('imgUrl'),productController.addProduct)
-router.get('/filter',productController.getFilter)
-router.post('/ratings',productController.postRatings)
+productRouter.get("/all", (req, res) => {
+  productController.getAllProducts(req, res);
+});
 
-router.get('/:id',productController.getOne)
+productRouter.post("/",upload.single("imgUrl"),(req, res) => {
+   productController.addProduct(req, res);
+});
+
+productRouter.get("/", (req, res) => {
+    productController.getOne(req, res);
+  });
+  
+productRouter.get("/filter", (req, res) => {
+    productController.getFilter(req, res);
+});
+
+productRouter.get("/averagePrice",(req,res)=>{
+  productController.averagePrice(req,res)
+});
+
+productRouter.get("/averageRating",(req,res)=>{
+  productController.averageRating(req,res)
+});
+
+productRouter.post("/ratings", (req, res) => {
+    productController.postRatings(req, res);
+});
 
 
 
-export default router;
 
