@@ -11,23 +11,25 @@ export default class ProductController {
       const products = await this.productRepository.getAll();
       res.status(200).send(products);
     } catch (error) {
+      console.log(error);
+      
       res.status(500).send("Something went wrong with get all");
     }
   };
 
   addProduct = async (req, res) => {
     try {
-      const { name, desc, price, catagory, sizes } = req.body;
-      console.log("file-->",req.file);
-      
+      const { name, desc, price, category, sizes, stock } = req.body;      
       const newProduct = new ProductModel(
         name,
         desc,
         parseFloat(price),
         req.file.filename,
-        catagory,
-        sizes.split(",")
+        category.split(','),
+        sizes.split(','),
+        Number(stock)
       );
+      
       await this.productRepository.add(newProduct);
       res.status(201).send(newProduct);
     } catch (error) {
@@ -104,7 +106,6 @@ export default class ProductController {
       res.status(200).send(result)
     } catch (error) {
       console.log(error);
-      
       res.status(500).send("Something went wrong with average ratings");
     }
   }

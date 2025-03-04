@@ -1,14 +1,16 @@
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
+//import mongoose from 'mongoose';
 dotenv.config();
 const url=process.env.DB_URL;
+console.log(url);
 
 let client;
 export const connectDB=()=>{
      MongoClient.connect(url)
     .then(clientInstance=>{
         client=clientInstance;
-        console.log("MongoDB is connected!"); 
+        console.log("MongoDB is connected!");  
         createCounter(client.db())
         createIndexs(client.db())
     })
@@ -20,7 +22,9 @@ export const connectDB=()=>{
 export const getDB=()=>{
     return client.db()
 }
-
+export const getClient=()=>{
+    return client;
+}
 const createCounter=async(db)=>{
     const existingCounter=await db.collection("counters").findOne({_id:"cartItemId"});
     if(!existingCounter){
@@ -39,5 +43,14 @@ const createIndexs=async(db)=>{
         
     }
     
-    
 }
+
+
+
+
+//   C:\Program Files\MongoDB\Server\8.0\data>  path in windows
+// mongod --replSet rs0 --dbpath "C:\data\db" --bind_ip 127.0.0.1:27017
+// for relpica set   mongod --replSet rs0--dbpath="C:\data\db"
+
+
+///imp

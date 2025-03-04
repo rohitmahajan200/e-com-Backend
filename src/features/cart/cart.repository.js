@@ -11,7 +11,7 @@ export default class CartRepository {
       const collection = db.collection(this.collection);
       const productId=new ObjectId(productID)
       const userId=new ObjectId(userID)
-      const id=await this.insertId(db)
+      const id=await this.insertId(db);
       await collection.updateOne(
         {userId,productId},
         { 
@@ -57,8 +57,7 @@ export default class CartRepository {
       {_id:"cartItemId"},
       {$inc:{value:1}},
       {returnDocument:'after'}
-    )
-    console.log("itemid->",itemId);
+    );
     return itemId.value;
   }
 }
